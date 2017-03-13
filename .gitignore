@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/jQueryTest/.vs/config/applicationhost.config
+/jQueryTest/.vs/jQueryTest/v15/.suo
+/jQueryTest/jQueryTest.sln
