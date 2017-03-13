@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Test jQuery :)</title>
+        <!-- <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" /> -->
+        <meta name="viewport" content="width=device-width" />
+        <script type="text/javascript" src="jquery-3.1.1.js"></script>
+        <script type="text/javascript">
+            jQuery(document).ready(function() {
+
+                // jQuery selectors sandbox: http://codylindley.com/jqueryselectors/
+
+                function Focus(tb)
+                {
+                    $(tb).toggleClass('classHilight');
+                }
+
+                function Blur(tb)
+                {
+                    $(tb).toggleClass('classHilight');
+                }
+
+
+/*                $('div').each(function(index, el) {
+                    // alert(index);
+                    alert($(this).html());
+                }
+*/                
+                // alert($('#trututu').html());
+                //alert($('p#mamamama.mama').html());
+                
+                //$(':input[type="text"]').css('background-color', 'yellow');
+                
+                /*$('form input[value*=coś').each(function(index, val) {
+                     alert($(val).val()); // lub $(this)
+                });*/
+
+                $('label').each(function(index, val) {
+                     /* iterate through array or object */
+                     var currentHtml = $(val).html();
+                     $(val).html("[MOD] " + currentHtml);
+                });
+
+                // #1
+                // $('#SkyTower').attr('title', 'Skaj Tałer');
+
+                // #2
+                $('#SkyTower').attr({
+                    title: 'Skaj Tałer',
+                    style: 'border:2px solid black'
+                });
+
+                $('.mama')
+                    .prepend('Uwaga... ')
+                    .append(' (HAHA!)')
+                    .wrap('<b />');
+
+                $('#trututu').remove();
+
+                var w1a = $('#w1a');
+                if (!w1a.hasClass('classOne') && !w1a.hasClass('classTwo'))
+                    w1a.addClass('classOne classTwo');
+
+                $('#btnSend').click(function(event) {
+                    /* Act on the event */
+                    alert('clicked submit');
+                    return false;
+                });
+
+                $('#btnSend').mouseover(function(event) {
+                    /* Act on the event */
+                    // alert('tylko spróbuj!');
+                });
+
+                $('#btnSend').on('mouseenter mouseleave mouseup mousedown', function(event) { // alternatives: .hover() or .toggle()
+                    //event.preventDefault(); // ???
+                    /* Act on the event */
+                    var log = $('#logContent');
+                    log.html(log.html() + "<br />" + event.type);
+                });
+
+                // cross-origin loading blocked:
+                // https://threejs.org/docs/#Manual/Getting_Started/How_to_run_things_locally
+                // $('#externalStatus').load('status.html #statusFrame');
+
+                $.get('status.html', function(data) {
+                    /*optional stuff to do after success */
+                    $('#externalStatus').html(data);
+                });
+                
+
+            });
+
+        </script>
+        <style type="text/css">
+            .classOne { background: yellow }
+            .classTwo { text-decoration: line-through }
+            .classHilight { background: pink }
+            .status { border: 1px; border-color: green; background-color: lightgreen; width: 100% }
+        </style>
+    </head>
+    <body>
+        <div id="body"> 
+        	<p id="trututu">Trututu!</p>
+            <p id="mamamama" class="mama">Mamamama</p>
+        </div>
+
+        <div id="externalStatus" />
+
+        <div id="afterBody">
+            <span>AfterBody</span>
+        </div>
+
+        <div id=imgBody>
+            <img id="SkyTower" src="sky.png" />
+        </div>
+
+        <form method="post">
+            <input type='hidden' value="plum hidden" />
+
+            <label>Test:</label>
+            <input type='text' name='txtTest' onfocus="Focus(this)" onblur="Blur(this)" />
+            <br />
+
+            <label>Drugi test:</label>
+            <input type='text' name='txtDrugiTest' value='coś' />
+            <br />
+
+            <label>Napisz coś o sobie:</label>
+            <textarea name='ltOSobie'>Napisz coś...</textarea>
+            <br />
+            <input id='btnSend' type='submit' value='Wyślij' />
+        </form>
+
+        <div>
+            <table id="sampleTable" border="1">
+                <th>Kolumna 1</th>
+                <th>Kolumna 2</th>
+
+                <tr>
+                    <td><span id="w1a">Wartość 1a</span></td>
+                    <td><span id="w2a">Wartość 2a</span></td>
+                </tr>
+                <tr>
+                    <td><span id="w1b">Wartość 1b</span></td>
+                    <td><span id="w2b">Wartość 2b</span></td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="log">
+            <span id="logContent">LOG:</span>
+        </div>
+
+    </body>
+</html>
